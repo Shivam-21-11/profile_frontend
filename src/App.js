@@ -4,7 +4,6 @@ import './App.css';
 import banner from './assets/banner-pfp.png';
 import {ChevronLeft,ChevronRight} from 'react-feather';
 
-
 import Cards from "./components/cards";
 
 
@@ -15,6 +14,7 @@ function App(){
   const [index , setIndex] = useState(0);
   const [isLoading,setIsLoading] = useState(false);
   const [isError,setIsError] = useState(false);
+  const [isOpen,setIsOpen] = useState(false);
 
   useEffect(()=>{
     const fetchData = async ()=>{
@@ -49,43 +49,97 @@ function App(){
       setIndex(index-1);
     }
   }
+
+
   if(isError){
     return <h1>Error...</h1>
   }
+
+
+
   if(isLoading){
     return <h1>Loading...</h1>
   }
+
+
+  
   return (
   <>
+<header id = "Home">
+  <div className='container mx-auto px-4 py-6'>
+    <div className="grid grid-cols-3 gap-4 items-center">
+      <div></div>
+    
+      <div className="col-span-1 flex justify-center">
+        <img
+          src="https://see.fontimg.com/api/renderfont4/nROx4/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTI1MCwiZnMiOjY1LCJmZ2MiOiIjRkZGOUY5IiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U2hpdmFtLUFp/ankh-sanctuary.png"
+          className="w-48 md:w-64 h-auto" 
+          alt="logo"
+        />
+      </div>
+      
+      <div className="col-span-1 flex justify-end relative mr-8">
+        <button onClick={()=>setIsOpen(!isOpen)}>
+          {!isOpen ? <img width="32" height="32" src="https://img.icons8.com/fluency/32/menu--v4.png" alt="menu--v4"/> 
+          : <img width="32" height="32" src="https://img.icons8.com/ios-filled/32/22C3E6/multiply.png" alt="multiply"/>}
+        </button>
 
-<header>
-<div className='container mx-auto px-4 py-6 flex justify-between items-center'>
-    <div>
-      <img src="https://see.fontimg.com/api/renderfont4/nROx4/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTI1MCwiZnMiOjY1LCJmZ2MiOiIjRkZGOUY5IiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U2hpdmFtLUFp/ankh-sanctuary.png"
-      className="w-32 h-auto" />
-      {/* <h1 className="font-bold text-xl cursor-default text-white">Shivam-Ai</h1> */}
+      {isOpen && <div className="bg-blue-400 absolute flex flex-col items-start top-12 rounded-lg p-2 w-6/12 z-50">
+
+
+        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
+        <img width="24" height="24" src="https://img.icons8.com/ios-glyphs/24/home.png" alt="home"/>
+          <a href="#Home" className="text-white cursor-pointer ml-4">Home</a>
+        </div>
+
+
+
+        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
+        <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/project.png" alt="project"/>
+          <a href="#Projects" className="text-white cursor-pointer ml-4">Projects</a>
+        </div>
+
+
+
+        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
+        <img width="24" height="24" src="https://img.icons8.com/windows/24/workstation.png" alt="workstation"/>
+          <a href="#Technologies" className="text-white cursor-pointer ml-4">Technologies</a>
+        </div>
+
+
+
+        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
+        <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/contact-card.png" alt="contact-card"/>
+          <a href="#Contact" className="text-white cursor-pointer ml-4">Contact</a>
+        </div>
+
+
+        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
+        <img width="24" height="24" src="https://img.icons8.com/wired/24/download--v1.png" alt="download--v1"/>
+          <a href={`${apiLink}/resume`} className="text-white cursor-pointer ml-4">Download Resume</a>
+        </div>
+
+
+        </div>}
+
+        
+      </div>
     </div>
-    <ul className="flex">
-      <li className="ml-4">
-        <a href="#Projects" className='text-gray-300 hover:text-white cursor-pointer'>Projects</a>
-      </li>
-      <li className="ml-4">
-        <a href="#Technologies" className='text-gray-300 hover:text-white cursor-pointer'>Technologies</a>
-      </li>
-      <li className="ml-4">
-        <a href="#Contact" className='text-gray-300 hover:text-white cursor-pointer'>Contact</a>
-      </li>
-      <li className="ml-4">
-        <a href={apiLink+'/resume'} className='text-gray-300 hover:text-white cursor-pointer'>Download Resume</a>
-      </li>
-    </ul>
   </div>
 </header>
 
 
+
+
+
+
+
+
+
+
+
 <main>
     <section>
-      {/* {#banner section} */}
       <div className="container mx-auto px-4 py-10 lg:px-24 flex gap-6">
         <div className="flex flex-col justify-center">
         <TypeAnimation className="font-bold text-4xl"
@@ -127,6 +181,21 @@ function App(){
       </div>
     </section>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section id="Projects">
       {/*Projects section*/}
       <div className="container mx-auto px-4 py-10 lg:px-24 flex gap-6 justify-center">
@@ -149,6 +218,22 @@ function App(){
       </div>
 
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <section id="Technologies">
@@ -185,6 +270,19 @@ function App(){
   </div>
 </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <section id="Contact">
   {/*Contact section*/}
