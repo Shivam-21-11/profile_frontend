@@ -3,9 +3,9 @@ import { TypeAnimation } from 'react-type-animation';
 import './App.css';
 import banner from './assets/banner-pfp.png';
 import {ChevronLeft,ChevronRight} from 'react-feather';
-
+import { Helmet } from 'react-helmet';
 import Cards from "./components/cards";
-
+import hicon from "./assets/head.ico";
 
 function App(){
   const apiLink = "https://profile-backend-ndbm.onrender.com"
@@ -65,6 +65,15 @@ function App(){
   
   return (
   <>
+
+<Helmet>
+  <title>Shivam-Ai</title>
+  <link rel="icon" type="image/png" href={hicon} />
+</Helmet>
+
+
+
+
 <header id = "Home">
   <div className='container mx-auto px-4 py-6'>
     <div className="grid grid-cols-3 gap-4 items-center">
@@ -84,7 +93,7 @@ function App(){
           : <img width="32" height="32" src="https://img.icons8.com/ios-filled/32/22C3E6/multiply.png" alt="multiply"/>}
         </button>
 
-      {isOpen && <div className="bg-blue-400 absolute flex flex-col items-start top-12 rounded-lg p-2 w-6/12 z-50">
+      {isOpen && <div className="bg-blue-400 absolute flex flex-col items-start top-12 rounded-lg p-2 w-content z-50">
 
 
         <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
