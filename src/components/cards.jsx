@@ -1,5 +1,4 @@
 import React from 'react';
-import './cards.css'
 import card from "../assets/card.jpg"
 
 
