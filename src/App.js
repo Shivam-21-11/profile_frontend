@@ -172,7 +172,7 @@ function App(){
           <p className="mt-2 text-gray-400">Embarking on the AI Journey: Exploring the Frontiers of Data Science in Computer Vision and NLP, Eager to Learn and Grow Together!</p>
 
         </div>
-        <div className="relative">
+        <div className="hidden sm:block">
       <img src={banner} width={350} alt="img-pfp" className="rounded-full" style={{clipPath: 'circle(50%)'}} />
       </div>
       </div>
