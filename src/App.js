@@ -4,6 +4,7 @@ import './App.css';
 import banner from './assets/banner-pfp.png';
 import {ChevronLeft,ChevronRight} from 'react-feather';
 import { Helmet } from 'react-helmet';
+import { Grid } from "react-loader-spinner";
 import Cards from "./components/cards";
 import hicon from "./assets/head.ico";
 
@@ -50,20 +51,7 @@ function App(){
     }
   }
 
-
-  if(isError){
-    return <h1>Error...</h1>
-  }
-
-
-
-  if(isLoading){
-    return <h1>Loading...</h1>
-  }
-
-
-  
-  return (
+    return (
   <>
 
 <Helmet>
@@ -124,8 +112,8 @@ function App(){
 
 
         <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4">
-        <img width="24" height="24" src="https://img.icons8.com/wired/24/download--v1.png" alt="download--v1"/>
-          <a href={`${apiLink}/resume`} className="text-white cursor-pointer ml-4">Download Resume</a>
+          <img width="24" height="24" src="https://img.icons8.com/material-two-tone/24/download--v1.png" alt="download--v1"/>
+          <a href={`${apiLink}/resume`} className="text-white cursor-pointer ml-4">Resume</a>
         </div>
 
 
@@ -211,10 +199,12 @@ function App(){
         <h1 className="font-bold text-3xl cursor-default text-white">Projects</h1>
       </div>
       <div className="relative container mx-auto px-4 py-10 lg:px-24 flex gap-6 justify-center">
-        
-      {data && data[index] && (
-  <Cards key={index} project={data[index]}/>
-)} 
+        {isLoading && <Grid visible={true} height="80" width="80" color="#00FFFF" ariaLabel="grid-loading" radius="12.5" wrapperStyle={{}} wrapperClass="grid-wrapper" />}
+      
+        {data && data[index] && <Cards key={index} project={data[index]}/>} 
+
+        {isError && <h1 className="font-bold text-3xl cursor-default text-white">Error Fetching Data</h1>}
+
         <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-between px-4 lg:px-8 xl:px-12">
           <button onClick={handlePrev} className="bg-white bg-opacity-10 hover:bg-opacity-100 rounded-full p-2">
             <ChevronLeft size={30} style={{ color: 'black' }}/>
