@@ -17,6 +17,7 @@ function App(){
   const [isLoading,setIsLoading] = useState(false);
   const [isError,setIsError] = useState(false);
   const [isOpen,setIsOpen] = useState(false);
+  
 
   const [name,setName] = useState('');
   const [msg,setMsg] = useState('');
@@ -51,7 +52,9 @@ function App(){
         });
         const responseData = await response.json();
         if(responseData.status === 'success'){
-          alert(`Message Sent (index_id : ${responseData.index_id})`);
+          setMsg('')
+          setName('')
+          alert(`Message Sent (insert_id : ${responseData.insert_id})`);
         }else{
           alert(`Message Failed (error : ${responseData.error})`);
         }
@@ -164,7 +167,7 @@ function App(){
     <section>
       <div className="container mx-auto px-4 py-10 lg:px-24 flex gap-6">
         <div className="flex flex-col justify-center">
-        <TypeAnimation className="font-bold text-4xl"
+        <TypeAnimation className="font-bold text-4xl text-white"
       sequence={[
         "Hello, I'm Shivam",
         1000,
@@ -353,12 +356,12 @@ function App(){
 
     <div className="flex flex-col items-start">
       <h1 className="font-bold text-2xl cursor-default text-white">Name :</h1>
-      <input placeholder="Name" type="text" className="bg-gray-800 p-2 mt-4 rounded-lg text-white w-full" onChange={(e)=>setName(e.target.value)}/>
+      <input placeholder='Lamen Corpus' value={name} type="text" className="bg-gray-800 p-2 mt-4 rounded-lg text-white w-full" onChange={(e)=>setName(e.target.value)} required/>
     </div>
     
     <div className="flex flex-col items-start">
       <h1 className="font-bold text-2xl cursor-default text-white">Message :</h1>
-      <textarea placeholder="Message" type="text" rows="4" className="bg-gray-800 p-2 mt-4 rounded-lg text-white w-full" onChange={(e)=>setMsg(e.target.value)}/>
+      <textarea placeholder='This is just a lorem ipsum text' value={msg} type="text" rows="4" className="bg-gray-800 p-2 mt-4 rounded-lg text-white w-full" onChange={(e)=>setMsg(e.target.value)} required/>
     </div>
     
     <div className="flex flex-col items-center">
