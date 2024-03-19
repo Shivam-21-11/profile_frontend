@@ -1,5 +1,5 @@
 import React from 'react';
-import card from "../assets/card.jpg"
+import card from "../../assets/card.jpg"
 
 
 const Cards = ({project}) => {
