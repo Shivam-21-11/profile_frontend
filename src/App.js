@@ -14,7 +14,6 @@ import Project from "./components/project/project";
 
 function App(){
   const apiLink = process.env.REACT_APP_BACKEND_API;
-  console.log(apiLink);
   return (<>
 
 <Helmet>
