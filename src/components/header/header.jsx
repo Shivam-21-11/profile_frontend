@@ -1,11 +1,15 @@
 import React,{useState} from "react";
+import logo from '../../assets/logo1.png';
+import {motion} from 'framer-motion';
+import './header.css';
+
+
 function Header({apiLink}) {
 
     const [isOpen,setIsOpen] = useState(false);
 
     const scrollToSection = (sectionID)=>{
       const section = document.getElementById(sectionID);
-      console.log(sectionID,section)
       if(section) section.scrollIntoView({behavior: "smooth"});
       setIsOpen(false)
     }
@@ -16,61 +20,63 @@ function Header({apiLink}) {
     }
 
     return (
-<header id = "Home">
+<header>
+
   <div className='container mx-auto px-4 py-6'>
-    <div className="grid grid-cols-3 gap-4 items-center">
+    <div className="grid grid-cols-3 gap-4 items-center ">
       <div></div>
       
       <div className="col-span-1 flex justify-center">
-        <img src="https://see.fontimg.com/api/renderfont4/nROx4/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTI1MCwiZnMiOjY1LCJmZ2MiOiIjRkZGOUY5IiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U2hpdmFtLUFp/ankh-sanctuary.png"
-            className="w-48 md:w-64 h-auto" 
+          <img src={logo}
+            className="w-52 md:w-52 h-auto" 
             alt="logo"
           />
       </div>
         
       <div className="col-span-1 flex justify-end relative lg:mr-8 sm:mr-0">
-        <button onClick={()=>setIsOpen(!isOpen)}>
-            {!isOpen ? <img width="32" height="32" src="https://img.icons8.com/fluency/32/menu--v4.png" alt="menu--v4"/> 
-            : <img width="32" height="32" src="https://img.icons8.com/ios-filled/32/22C3E6/multiply.png" alt="multiply"/>}
-        </button>
-  
-        {isOpen && <div className="bg-blue-400 absolute flex flex-col items-start top-12 rounded-lg p-2 w-content z-50">
+        <motion.button  whileHover={{scale:1.1}} whileTap={{scale:0.9}} className="bg-white p-2 rounded-full" onClick={()=>setIsOpen(!isOpen)}>{!isOpen ? <motion.img whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} src="https://img.icons8.com/plumpy/32/menu--v5.png" alt="menu"/> : <motion.img whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} src="https://img.icons8.com/ios-glyphs/32/delete-sign.png" alt="close"/>}</motion.button>
+        {isOpen && <div className="absolute flex flex-col items-start top-16 rounded-lg p-2 w-content z-50 glass">
   
   
-        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4" 
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4" 
         onClick={()=>scrollToSection('Home')}>
-          <img width="24" height="24" src="https://img.icons8.com/ios-glyphs/24/home.png" alt="home"/>
+          <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/FFFFFF/home.png" alt="home"/>
           <p className="text-white cursor-pointer ml-4">Home</p>
         </div>
   
   
   
-        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4"
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4"
         onClick={()=>scrollToSection('Projects')}>
-          <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/project.png" alt="project"/>
+          <img width="24" height="24" src="https://img.icons8.com/ios-filled/24/FFFFFF/untested.png" alt="untested"/>
           <p className="text-white cursor-pointer ml-4">Projects</p>
         </div>
   
   
   
-        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4"
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4"
         onClick={()=>scrollToSection('Technologies')}>
-          <img width="24" height="24" src="https://img.icons8.com/windows/24/workstation.png" alt="workstation"/>
+          <img width="24" height="24" src="https://img.icons8.com/glyph-neue/24/FFFFFF/circuit.png" alt="technology"/>
           <p className="text-white cursor-pointer ml-4">Technologies</p>
         </div>
   
   
   
-        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4"
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4"
         onClick={()=>scrollToSection('Contact')}>
-          <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/contact-card.png" alt="contact-card"/>
+          <img width="24" height="24" src="https://img.icons8.com/ios-glyphs/24/FFFFFF/contact-card.png" alt="contact-card"/>
           <p className="text-white cursor-pointer ml-4">Contact</p>
         </div>
-  
-  
-        <div className="flex w-full justify-center hover:bg-blue-300 cursor-pointer border-l-transparent rounded-lg p-4"
+
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4"
+        onClick={()=>scrollToSection('Message')}>
+          <img width="24" height="24" src="https://img.icons8.com/ios-filled/24/FFFFFF/chat-message--v1.png" alt="chat-message--v1"/>
+          <p className="text-white cursor-pointer ml-4">Message</p>
+        </div>
+
+        <div className="flex w-full justify-start hover:bg-black cursor-pointer border-l-transparent rounded-lg p-4"
         onClick={()=>downloadResume()}>
-          <img width="24" height="24" src="https://img.icons8.com/material-two-tone/24/download--v1.png" alt="download--v1"/>
+          <img width="24" height="24" src="https://img.icons8.com/ios-filled/24/FFFFFF/resume.png" alt="resume"/>
           <p className="text-white cursor-pointer ml-4">Resume</p>
         </div>
   
@@ -78,7 +84,7 @@ function Header({apiLink}) {
         </div>}
   
           
-        </div>
+      </div>
       </div>
     </div>
   </header>)

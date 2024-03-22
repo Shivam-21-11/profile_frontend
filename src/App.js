@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import { Helmet } from 'react-helmet';
-import hicon from "./assets/head.ico";
+import logoico from './assets/favicon.ico';
 
 
 import Header from "./components/header/header";
@@ -18,7 +18,7 @@ function App(){
 
 <Helmet>
   <title>Shivam-Ai</title>
-  <link rel="icon" type="image/png" href={hicon} />
+  <link rel="icon" type="image/png" href={logoico} />
 </Helmet>
 <Header apiLink={apiLink}/>
 <main>

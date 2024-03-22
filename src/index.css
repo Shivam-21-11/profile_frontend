@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "BoldItalic";
+  src: local("./assets/fonts") , url("./assets/fonts/DroidSerif-BoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Light";
+  src: local("./assets/fonts") , url("./assets/fonts/DroidSerif-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Bold";
+  src: local("./assets/fonts") , url("./assets/fonts/DroidSerif-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Italic";
+  src: local("./assets/fonts") , url("./assets/fonts/DroidSerif-Italic.ttf") format("truetype");
+}
+
+.bold-italic{
+  font-family: "BoldItalic";
+}
+.light{
+  font-family: "Light";
+}
+.bold{
+  font-family: "Bold";
+}
+.italic{
+  font-family: "Italic";
+}
+.glass{
+  background: rgba(225, 225, 225, 0.1);
+  backdrop-filter: blur(10px);
+}
+.glass-beige{
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+}

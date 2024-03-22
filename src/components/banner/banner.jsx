@@ -1,52 +1,54 @@
-import React from "react";
-import banner from '../../assets/banner-pfp.png';
-import { TypeAnimation } from 'react-type-animation';
-
+import {React,useEffect,useState} from "react";
+import { motion } from "framer-motion"
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import {loadFull} from "tsparticles"
+import particleConfig from "../../assets/animation/particle_config";
 
 function Banner(){
+  const t1 = "Hi,".split('');
+  const t2 = "I'm  Shivam  Singh,".split("");
+  const t3 = "Machine  Learning".split("");
+  const t4 = "Engineer".split("");
+
+  const [init,setInit] = useState(false);
+  useEffect(()=>{
+    initParticlesEngine(async (engine)=>{
+      await loadFull(engine);
+    }).then(()=>{
+      setInit(true);
+    })
+  },[])
+  const particleLoaded = (container) =>{console.log(container)}
+
     return (
-<section>
-      <div className="container mx-auto px-4 py-10 lg:px-24 flex gap-6">
-        <div className="flex flex-col justify-center">
-        <TypeAnimation className="font-bold text-4xl text-white"
-      sequence={[
-        "Hello, I'm Shivam",
-        1000,
-        "I Love Coding.....",
-        1000,
-        "My Skills Include....",
-        1000,
-        "Python,",
-        1000,
-        "Tensorflow,",
-        1000,
-        "Pytorch,",
-        1000,
-        "Git,",
-        1000,
-        "AWS SageMaker,",
-        1000,
-        "Basic Web Development,",
-        1000,
-        "Basic DBMS",
-        1000,
-      ]}
-      wrapper="span"
-      speed={50}
-      style={{ fontSize: '2em', display: 'inline-block' }}
-      repeat={Infinity}
-    />
-          
-          <h2 className="font-bold text-4xl mt-1 gradient-text pb-2">Machine Learning Engineer</h2>
-          <p className="mt-2 text-gray-400">Embarking on the AI Journey: Exploring the Frontiers of Data Science in Computer Vision and NLP, Eager to Learn and Grow Together!</p>
-
-        </div>
-        <div className="hidden sm:block">
-      <img src={banner} width={350} alt="img-pfp" className="rounded-full" style={{clipPath: 'circle(50%)'}} />
+      <>
+      {/* Large Screen */}
+  <section id="#Home" className="hidden sm:block">
+    <div className="container flex w-full h-screen relative">
+    {init && <Particles className="flex absolute w-full h-full z-0" id="tsparticles" particlesLoaded={particleLoaded} options={particleConfig}/>}
+      <div className="flex flex-col justify-center w-full h-screen z-10 grid-rows-3 gap-4">
+        <div className="flex ps-10">{t1.map((val,idx)=> val === ' ' ? <motion.span key={idx}>&nbsp;&nbsp;</motion.span> : <motion.span className=" text-white bold-italic text-6xl cursor-pointer" whileHover={{ scale: 1.2 , color:'#F4DFC8' }} whileTap={{ scale: 0.8 }}  key={idx}>{val}</motion.span>)}</div>
+        <div className="flex ps-10">{t2.map((val,idx)=> val === ' ' ? <motion.span key={idx}>&nbsp;&nbsp;</motion.span> : <motion.span className=" text-white bold-italic text-6xl cursor-pointer" whileHover={{ scale: 1.2 , color:'#F4DFC8' }} whileTap={{ scale: 0.8 }}  key={idx}>{val}</motion.span>)}</div>
+        <div className="flex ps-10">{t3.map((val,idx)=> val === ' ' ? <motion.span key={idx}>&nbsp;&nbsp;</motion.span> : <motion.span className=" text-white bold-italic text-6xl cursor-pointer" whileHover={{ scale: 1.2 , color:'#F4DFC8' }} whileTap={{ scale: 0.8 }}  key={idx}>{val}</motion.span>)}</div>
+        <div className="flex ps-10">{t4.map((val,idx)=> val === ' ' ? <motion.span key={idx}>&nbsp;&nbsp;</motion.span> : <motion.span className=" text-white bold-italic text-6xl cursor-pointer" whileHover={{ scale: 1.2 , color:'#F4DFC8' }} whileTap={{ scale: 0.8 }}  key={idx}>{val}</motion.span>)}</div>
+        <div className="flex ps-10"><motion.p whileHover={{scale:1.2,x:80, color:'#F4DFC8'}} className="mt-2 italic text-gray-400 cursor-pointer">Embarking on the AI Journey: Exploring the Frontiers of Data Science in Computer Vision and NLP, Eager to Learn and Grow Together!</motion.p></div>
       </div>
-      </div>
-    </section>
 
+    </div>
+  </section>
+  {/* Large Screen */}
+  <section id="#Home" className="block sm:hidden">
+    <div className="container flex flex-col mt-10 mb-20 pt-10 px-2 items-center w-full">
+      <div className="flex flex-col items-center gap-2">
+        <motion.h1 whileTap={{ scale: 0.8, color:'#F4DFC8' }} className="text-white bold-italic text-4xl">Hi,</motion.h1>
+        <motion.h1 whileTap={{ scale: 0.8, color:'#F4DFC8' }} className="text-white bold-italic text-4xl">I'm Shivam,</motion.h1>
+        <motion.h1 whileTap={{ scale: 0.8, color:'#F4DFC8' }} className="text-white bold-italic text-4xl">Machine Learning,</motion.h1>
+        <motion.h1 whileTap={{ scale: 0.8, color:'#F4DFC8' }} className="text-white bold-italic text-4xl">Engineer</motion.h1>
+        <motion.p whileTap={{scale: 1.2, color:'#F4DFC8'}} className="mt-2 italic text-gray-400 cursor-pointer">Embarking on the AI Journey: Exploring the Frontiers of Data Science in Computer Vision and NLP, Eager to Learn and Grow Together!</motion.p>
+      </div>
+    </div>
+  </section>
+  </>
     )
 }
 export default Banner;

@@ -1,19 +1,53 @@
 import {React,useState,useEffect} from "react";
 import { Grid } from "react-loader-spinner";
+import {motion} from "framer-motion";
 import Cards from "./cards";
-import {ChevronLeft,ChevronRight} from 'react-feather';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 
 
 function Project({apiLink}){
     const [data,setData] = useState(null);
-    const [len,setLen] = useState(0);
-    const [index , setIndex] = useState(0);
     const [isLoading,setIsLoading] = useState(false);
     const [isError,setIsError] = useState(false);
     
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
   
-  
-  
+    
     useEffect(()=>{
       const fetchData = async ()=>{
         setIsLoading(true);
@@ -21,7 +55,6 @@ function Project({apiLink}){
           const response = await fetch(`${apiLink}/projects`);
           const jsonData = await response.json();
           setData(jsonData.projects);
-          setLen(jsonData.projects.length);
           
         }catch (error){
           alert(error)
@@ -32,50 +65,22 @@ function Project({apiLink}){
       fetchData()
     },[apiLink]);
 
-    const handleNext = ()=>{
-        if(index === len-1){
-          setIndex(0);
-        }else{
-          setIndex(index+1);
-        }
-      }
-    
-      const handlePrev = ()=>{
-        if(index === 0){
-          setIndex(len-1);
-        }else{
-          setIndex(index-1);
-        }
-      }
     
     
     return(
-<section id="Projects">
-    <div className="container mx-auto px-4 py-10 lg:px-24 flex gap-6 justify-center">
-        <h1 className="font-bold text-3xl cursor-default text-white">Projects</h1>
-    </div>
-    <div className="relative container mx-auto px-4 py-10 lg:px-24 flex gap-6 justify-center">
-        {isLoading && <Grid visible={true} height="80" width="80" color="#00FFFF" ariaLabel="grid-loading" radius="12.5" wrapperStyle={{}} wrapperClass="grid-wrapper" />}
-      
-        {data && data[index] && 
-        <div>
-          <Cards key={index} project={data[index]}/>
-          <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-between px-4 lg:px-8 xl:px-12">
-          <button onClick={handlePrev} className="bg-white bg-opacity-10 hover:bg-opacity-100 rounded-full p-2">
-            <ChevronLeft size={30} style={{ color: 'black' }}/>
-          </button>
-          <button onClick={handleNext} className="bg-white bg-opacity-10 hover:bg-opacity-100 rounded-full p-2">
-            <ChevronRight size={30} style={{ color: 'black' }}/>
-          </button>
-          </div>
-        </div>} 
+      <section id="Projects" className="w-full lg:h-screen">
+        <div className="container mx-auto px-4 py-10 flex gap-8 justify-center">
+          <motion.h1 whileInView={{color: "white",scale: 1.2,paddingBottom: 8,borderBottom: "4px solid #F4DFC8"}} transition={{duration:0.5,delay:0.2}} className="bold-italic text-4xl cursor-default text-gray-800">Projects</motion.h1>
+        </div>
+        <div className="container w-3/4 items-center mx-auto pt-20">
+        {isLoading && <Grid visible={true} height="80" width="80" color="#F4DFC8" ariaLabel="grid-loading" radius="12.5" wrapperStyle={{}} wrapperClass="grid-wrapper"/>}
+        {isError && <h3 className="italic text-3xl cursor-default text-gray-600">Error Fetching Data......</h3>}
+          {data && <div className="slider-container"><Slider {...settings}>
+              {data.map((project,index)=><Cards project={project} key={index}/>)}
+            </Slider></div>}
 
-
-
-        {isError && <h3 className="font-bold text-3xl cursor-default text-white">Error Fetching Data</h3>}
-    </div>
-
-</section>
+        </div>
+      </section>
     )
 }
 
